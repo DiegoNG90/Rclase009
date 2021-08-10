@@ -2,12 +2,25 @@ import { initialValues, validationSchema } from './schemas';
 import { useFormik } from 'formik'; // Usa reducers para manejar estados de manera interna!
 import { Container, Grid, Box, TextField, Button } from '@material-ui/core';
 import * as Yup from "yup";
+import {AuthContext} from '../../contexts/auth';
+import {useContext, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
 const Login = () => {
+  const [wrongPassword, setWrongPassword] = useState(false)
+  const {login} = useContext(AuthContext)
+  const history = useHistory()
+
   // Validacion pre onSubmit
   const handleLogin = ({ username, password }) => {
     // llegado a este punto, username y password YA ESTAN VALIDADOS por mi schema: no tengo que validar más nada!
-    console.log(username, password)
+    const jwt = login({username, password}) // jwt sea null o sea != de null
+    if(!jwt) {
+        return setWrongPassword(true)
+    }else{
+        setWrongPassword(false)
+        return history.push("/dashboard")
+    }
   };
   const formik = useFormik({
     initialValues,
@@ -60,6 +73,7 @@ const Login = () => {
               </Button>
             </Box>
           </form>
+          {wrongPassword && <span>Usuario o contraseña incorrectas</span>}
         </Grid>
       </Grid>
     </Container>
