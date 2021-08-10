@@ -25,10 +25,13 @@ export const AuthProvider = ({children}) => {
         // El backend verifica el usuario password enviados
         // Si el usuario y el password son correcto, el backend crea un JWT (iat, nombre, id)
         // Si los datos son incorrectos → jwt: null
-         
-        const {jwt} = {ok:true, jwt: "el_token_jaskldasd"}
-        setAuth({ jwt })
-        return jwt;
+        if(username === "admin" && password === "1234"){
+            const {jwt} = {ok:true, jwt: "el_token_jaskldasd"}
+            setAuth({ jwt });
+            return jwt
+        }else{
+            return null;
+        }
     }
 
     return (
