@@ -1,6 +1,6 @@
 import {SET_AUTH, LOGOUT} from '../actions/auth'
 
-const initialState = {
+export const initialState = {
     isLoggedIn: false,
     jwt: null, // Se va a enviar en cada request HTTP en un header (lo haremos con interceptors) + storage
 }
