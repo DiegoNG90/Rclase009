@@ -9,6 +9,6 @@ export const initialValues = {
 
 export const validationSchema = {
     username: Yup.string().required("El campo usuario es obligatorio"),
-    password: Yup.string().min("El campo password debe contener por lo menos 5 caracteres").required("El campo password es obligatorio")
+    password: Yup.string().required("El campo password es obligatorio")
 }
 
