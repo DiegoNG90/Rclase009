@@ -19,7 +19,12 @@ const Login = () => {
   });
   return (
     <Container>
-      <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Grid item xs={12} md={4}>
           <form onSubmit={formik.handleSubmit}>
             <Box mt={1}>
@@ -32,6 +37,7 @@ const Login = () => {
                 fullWidth
               />
             </Box>
+            {formik?.errors?.username && <span>{formik.errors.username}</span>}
             <Box>
               <TextField
                 type="password"
@@ -42,8 +48,16 @@ const Login = () => {
                 fullWidth
               />
             </Box>
+            {formik?.errors?.password && <span>{formik.errors.password}</span>}
             <Box>
-                <Button type="submit" fullWidth variant="contained" color="primary">Login</Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Login
+              </Button>
             </Box>
           </form>
         </Grid>
