@@ -1,12 +1,13 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 const Dashboard = () => {
-  const { getUserInformation } = useContext(AuthContext);
+  const { getUserInformation } = useAuth();
+  const {name:{name}} = getUserInformation()
+  console.log(name)
   return (
     <>
       <h2>Dashboard</h2>
-      {getUserInformation().name}
+      <h3>Bienvenido {name}</h3>
     </>
   );
 };
