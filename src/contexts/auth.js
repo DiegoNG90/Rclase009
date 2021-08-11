@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext } from 'react';
 import { SET_AUTH, LOGOUT } from '../actions/auth'
 import { authReducer, initialState } from '../reducers/auth'
+import jwt_decode from 'jwt-decode'
 
 // 1) Creo/defino el contexto
 export const AuthContext = createContext();
@@ -15,6 +16,8 @@ export const AuthProvider = ({children}) => {
     const setAuth = ({ jwt }) => {
         dispatch({type: SET_AUTH, payload: {jwt} })
     }
+    
+    const getUserInformation = () => ({name: jwt_decode(state.jwt)})
 
     const logout = () => {
         dispatch({type: LOGOUT})
@@ -26,7 +29,10 @@ export const AuthProvider = ({children}) => {
         // Si el usuario y el password son correcto, el backend crea un JWT (iat, nombre, id)
         // Si los datos son incorrectos → jwt: null
         if(username === "admin" && password === "1234"){
-            const {jwt} = {ok:true, jwt: "el_token_jaskldasd"}
+            const { jwt } = {
+              ok: true,
+              jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRpZWdvIEdhbmRhcmEiLCJpYXQiOjE1MTYyMzkwMjJ9.kxPsWCLwyxLj5nLbvCKk32THPLDrdVG7rMR1YYlev8M',
+            };
             setAuth({ jwt });
             return jwt
         }else{
@@ -35,7 +41,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-      <Provider value={{ state, setAuth, logout, login }}>
+      <Provider value={{ state, setAuth, logout, login, getUserInformation }}>
         {' '}
         {children}{' '}
       </Provider>
