@@ -21,6 +21,7 @@ export const AuthProvider = ({children}) => {
 
     const logout = () => {
         dispatch({type: LOGOUT})
+        localStorage.removeItem("auth")
     }
     const login = ({username, password}) => {
         // Peticion HTTP axios.post ({username, paswword}). El server me devuelve un JWT
@@ -34,6 +35,7 @@ export const AuthProvider = ({children}) => {
               jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRpZWdvIEdhbmRhcmEiLCJpYXQiOjE1MTYyMzkwMjJ9.kxPsWCLwyxLj5nLbvCKk32THPLDrdVG7rMR1YYlev8M',
             };
             setAuth({ jwt });
+            localStorage.setItem("auth", jwt)
             return jwt
         }else{
             return null;
