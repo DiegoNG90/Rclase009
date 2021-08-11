@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
     const setAuth = ({ jwt }) => {
         dispatch({type: SET_AUTH, payload: {jwt} })
     }
-    
+
     const getUserInformation = () => ({name: jwt_decode(state.jwt)})
 
     const logout = () => {
@@ -47,6 +47,9 @@ export const AuthProvider = ({children}) => {
       </Provider>
     );
 }
-export const useAuth = () => {
 
+export const useAuth = () => {
+    const context = useContext(AuthContext)
+    if(!context) throw new Error("useAuth must be wrapped with AuthProvider")
+    return context
 }

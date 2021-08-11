@@ -2,13 +2,14 @@ import { initialValues, validationSchema } from './schemas';
 import { useFormik } from 'formik'; // Usa reducers para manejar estados de manera interna!
 import { Container, Grid, Box, TextField, Button } from '@material-ui/core';
 import * as Yup from "yup";
-import {AuthContext} from '../../contexts/auth';
-import {useContext, useState} from 'react';
+import { useAuth } from '../../contexts/auth';
+import { useState } from 'react';
 import {useHistory} from 'react-router-dom';
+
 
 const Login = () => {
   const [wrongPassword, setWrongPassword] = useState(false)
-  const {login} = useContext(AuthContext)
+  const {login} = useAuth()
   const history = useHistory()
 
   // Validacion pre onSubmit
