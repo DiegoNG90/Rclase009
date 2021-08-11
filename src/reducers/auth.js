@@ -1,9 +1,9 @@
 import {SET_AUTH, LOGOUT} from '../actions/auth'
 
 export const initialState = {
-    isLoggedIn: false,
-    jwt: null, // Se va a enviar en cada request HTTP en un header (lo haremos con interceptors) + storage
-}
+  isLoggedIn: false,
+  jwt: localStorage.getItem('auth'), // Se va a enviar en cada request HTTP en un header (lo haremos con interceptors) + storage
+};
 
 export const authReducer = (state= initialState, action) => {
     switch (action.type){
@@ -18,13 +18,6 @@ export const authReducer = (state= initialState, action) => {
             return initialState;
         }
         default:
-            // const lsJwt = localStorage.getItem("auth")
-            // if(lsJwt){
-            //     return {
-            //         isLoggedIn: true,
-            //         jwt: lsJwt
-            //     }
-            // }
             return state;
     }
 }
