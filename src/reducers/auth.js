@@ -18,6 +18,13 @@ export const authReducer = (state= initialState, action) => {
             return initialState;
         }
         default:
+            // const lsJwt = localStorage.getItem("auth")
+            // if(lsJwt){
+            //     return {
+            //         isLoggedIn: true,
+            //         jwt: lsJwt
+            //     }
+            // }
             return state;
     }
 }
