@@ -29,6 +29,7 @@ export const AuthProvider = ({children}) => {
         // El backend verifica el usuario password enviados
         // Si el usuario y el password son correcto, el backend crea un JWT (iat, nombre, id)
         // Si los datos son incorrectos → jwt: null
+        // Manualmente sería: API.post("/auth", {username, password})
         if(username === "admin" && password === "1234"){
             const { jwt } = {
               ok: true,
